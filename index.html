@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogHub - Share Your Stories</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="BlogHub is a platform for writers and readers to share and discover stories.">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "BlogHub",
+      "url": "https://glittering-truffle-802cc5.netlify.app/"
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar" style="background: var(--background); position: sticky; top: 0; z-index: 1000; transition: all 0.3s ease; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div class="logo" id="home-logo" style="cursor:pointer; color: var(--primary-color); font-size: 2rem; font-weight: 700;">BlogHub</div>
+        <div class="nav-links" style="display: flex; align-items: center; gap: 2rem;">
+            <a href="#categories" style="color: var(--text-main); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">Categories</a>
+            <a href="#trending" style="color: var(--text-main); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">Trending</a>
+            <a href="#about" style="color: var(--text-main); text-decoration: none; font-weight: 500; transition: all 0.3s ease;">About</a>
+            <div class="search-bar" style="position: relative;">
+                <input type="text" placeholder="Search articles..." style="padding: 0.5rem 1rem; border-radius: 2rem; border: 1px solid var(--primary-color); background: var(--background); color: var(--text-main); width: 200px;">
+                <i class="fas fa-search" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #2563EB;"></i>
+            </div>
+            <a href="login.html" class="login-btn" style="color: #1E293B !important; text-decoration: none; font-weight: 600;">Login</a>
+            <a href="register.html" class="signup-btn" style="background: var(--primary-color); color: white; padding: 0.5rem 1.5rem; border-radius: 2rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease;">Register</a>
+        </div>
+    </nav>
+
+    <section class="hero" style="background: #fff; position: relative; overflow: hidden;">
+        <div class="hero-pattern" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%239C92AC\' fill-opacity=\'0.05\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'); opacity: 0.5;"></div>
+        <div class="hero-content" style="position: relative; z-index: 1;">
+            <h1 style="color: var(--text-main); text-shadow: 0 2px 4px rgba(0,0,0,0.1);">Share Your Story With The World</h1>
+            <p style="color: var(--text-secondary);">Join our community of writers and readers. Share your thoughts, experiences, and knowledge with millions of readers worldwide.</p>
+            <div class="cta-buttons">
+                <a href="register.html" class="primary-btn" style="background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139,124,246,0.2);">Start Writing</a>
+                <a href="#featured" class="secondary-btn" style="background: transparent; color: var(--primary-color); padding: 1rem 2rem; border-radius: 2rem; text-decoration: none; font-weight: 600; border: 2px solid var(--primary-color); transition: all 0.3s ease;">Read Stories</a>
+            </div>
+            <div class="hero-stats" style="display: flex; gap: 2rem; margin-top: 2rem; color: var(--text-secondary);">
+                <div class="stat">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">10K+</span>
+                    <span>Active Writers</span>
+                </div>
+                <div class="stat">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">50K+</span>
+                    <span>Articles</span>
+                </div>
+                <div class="stat">
+                    <span style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color);">1M+</span>
+                    <span>Readers</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image" style="position: relative; z-index: 1;">
+            <img src="blogging.svg" alt="Blogging Illustration" style="width:100%; max-width:480px; border-radius:12px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); animation: float 6s ease-in-out infinite;" loading="lazy" />
+        </div>
+    </section>
+
+    <!-- Latest Articles Section -->
+    <section class="latest-articles" style="padding: 5rem 5% 2rem; background: var(--background);">
+        <h2 style="text-align:center; font-size:2.8rem; color:var(--text-main); font-weight:800; margin-bottom:2rem;">Latest Articles</h2>
+        <div style="display:flex; justify-content:center; gap:1rem; margin-bottom:2.5rem;">
+            <button class="filter-btn" data-filter="All">All</button>
+            <button class="filter-btn" data-filter="Technology">Technology</button>
+            <button class="filter-btn" data-filter="Design">Design</button>
+            <button class="filter-btn" data-filter="Lifestyle">Lifestyle</button>
+        </div>
+        <div class="articles-list" style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;">
+            <div class="article-card" style="background:var(--card-bg); border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:40%; min-width:340px; max-width:600px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; transition: all 0.3s ease; position: relative; overflow: hidden;">
+                <div class="article-image" style="position: relative; margin: -2.5rem -2rem 1.5rem -2rem;">
+                    <img src="${article.img}" alt="${article.title}" style="width:100%; height:200px; object-fit:cover;" loading="lazy">
+                </div>
+                <h3 style="color:var(--text-main); font-size:1.8rem; font-weight:700; margin-bottom:0.5rem;">${article.title}</h3>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="${article.author}" style="width: 40px; height: 40px; border-radius: 50%;" loading="lazy">
+                    <div>
+                        <div style="color:var(--text-main); font-weight:600;">${article.author}</div>
+                        <div style="color:var(--text-secondary); font-size:0.9rem;">${article.date}</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.6; margin-bottom:1.5rem;">${article.summary}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 1rem;">
+                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="far fa-heart"></i>
+                            <span>245</span>
+                        </button>
+                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="far fa-comment"></i>
+                            <span>42</span>
+                        </button>
+                    </div>
+                    <button style="background: var(--primary-color); color: white; padding: 0.5rem 1.5rem; border-radius: 2rem; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Read More</button>
+                </div>
+                <span style="display:inline-block; background:#2563EB; color:#fff; border-radius:1rem; padding:0.4rem 1.2rem; font-size:1rem; font-weight:600; position:absolute; top:1.5rem; right:1.5rem;">${article.category}</span>
+            </div>
+        </div>
+        <div style="display:flex; justify-content:center; margin-top:1.5rem;">
+            <button id="load-more-btn" style="background:var(--background); color:var(--primary-color); border:2px solid var(--primary-color); border-radius:2rem; padding:0.75rem 2.5rem; font-weight:600; font-size:1.1rem; box-shadow:0 2px 8px rgba(139,124,246,0.08);">Load More Articles</button>
+        </div>
+    </section>
+
+    <!-- Trending Now Section -->
+    <section class="trending-now" id="trending" style="padding: 5rem 5% 2rem; background: var(--background-alt);">
+        <h2 style="text-align:center; font-size:2.8rem; color:var(--text-main); font-weight:800; margin-bottom:0.5rem;">Trending Now</h2>
+        <div style="text-align:center; margin-bottom:2.5rem;"><a href="#" id="trending-view-all" style="color:var(--primary-color); font-weight:500; text-decoration:underline; font-size:1.1rem;">View All</a></div>
+        <div class="trending-list" style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;"></div>
+    </section>
+
+    <!-- Why Choose BlogHub Section -->
+    <section class="features" style="padding: 5rem 5% 2rem; background: var(--background);">
+        <div class="section-header" style="text-align: center; max-width: 800px; margin: 0 auto 4rem;">
+            <h2 style="font-size: 2.8rem; color: var(--text-main); font-weight: 800; margin-bottom: 1rem;">Why Choose BlogHub</h2>
+            <p style="color: var(--text-secondary); font-size: 1.2rem; line-height: 1.6;">Experience the perfect blend of powerful features and user-friendly design that makes BlogHub the preferred platform for writers worldwide</p>
+        </div>
+        
+        <div class="whychoose-content" style="max-width: 1200px; margin: 0 auto;">
+            <div class="features-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+                <!-- Feature 1 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-pen-fancy" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Intuitive Writing Experience</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Our distraction-free editor combines simplicity with powerful features. Format your content, add media, and preview your posts in real-time with our seamless interface.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-chart-line" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Advanced Analytics</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Track your blog's performance with detailed analytics. Understand your audience, monitor engagement, and optimize your content strategy with real-time insights.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-comments" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Engaged Community</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Connect with readers through comments, likes, and shares. Build a loyal following and foster meaningful discussions around your content.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-palette" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Customizable Design</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Express your unique style with our collection of modern, responsive themes. Customize colors, layouts, and typography to match your brand.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-shield-alt" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Secure Platform</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Your content is protected with enterprise-grade security. Regular backups and advanced encryption ensure your work is always safe and accessible.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-card" style="background: var(--card-bg); padding: 2.5rem; border-radius: 16px; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; overflow: hidden;">
+                    <div class="feature-icon" style="width: 64px; height: 64px; background: var(--primary-color); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <i class="fas fa-dollar-sign" style="font-size: 2rem; color: white;"></i>
+                    </div>
+                    <h3 style="color: var(--text-main); font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Monetization Options</h3>
+                    <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.6;">Turn your passion into profit with multiple revenue streams. From ads to premium content, we provide the tools to monetize your audience.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="features" style="padding: 5rem 5% 2rem; background: var(--background-alt);">
+        <h2 style="text-align:center; font-size:2.8rem; color:var(--text-main); font-weight:800; margin-bottom:0.5rem;">About BlogHub</h2>
+        <div style="text-align:center; color:var(--text-secondary); font-size:1.2rem; margin-bottom:2.5rem;">Your platform for sharing stories and connecting with readers worldwide</div>
+        
+        <div class="about-content" style="max-width: 1200px; margin: 0 auto 4rem;">
+            <div style="display: flex; gap: 3rem; align-items: center; margin-bottom: 4rem; background: var(--card-bg); color: var(--text-main);">
+                <div style="flex: 1;">
+                    <h3 style="color:var(--text-main); font-size:1.8rem; font-weight:700; margin-bottom:1rem;">Our Mission</h3>
+                    <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.6;">At BlogHub, we believe in the power of storytelling. Our mission is to provide a platform where writers can share their unique perspectives, connect with readers, and build meaningful communities through the art of writing.</p>
+                </div>
+                <div style="flex: 1; text-align: center;">
+                    <i class="fas fa-bullseye" style="font-size:4rem; color:var(--primary-color);"></i>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 3rem; align-items: center; margin-bottom: 4rem; background: var(--card-bg); color: var(--text-main);">
+                <div style="flex: 1; text-align: center;">
+                    <i class="fas fa-users" style="font-size:4rem; color:var(--primary-color);"></i>
+                </div>
+                <div style="flex: 1;">
+                    <h3 style="color:var(--text-main); font-size:1.8rem; font-weight:700; margin-bottom:1rem;">Our Community</h3>
+                    <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.6;">Join thousands of writers and readers who make BlogHub their home for sharing stories, ideas, and experiences. Our diverse community spans across various topics and interests, creating a rich tapestry of content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Categories Section -->
+    <section class="browse-categories" id="categories" style="padding: 5rem 5% 2rem; background: var(--background);">
+        <h2 style="text-align:center; font-size:2.8rem; color:var(--text-main); font-weight:800; margin-bottom:0.5rem;">Browse Categories</h2>
+        <div style="text-align:center; color:var(--text-secondary); font-size:1.2rem; margin-bottom:2.5rem;">Find content that interests you</div>
+        <div style="display:flex; gap:2rem; justify-content:center; flex-wrap:wrap;">
+            <div class="category-card" data-category="Technology" style="background:var(--card-bg); border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:18%; min-width:220px; max-width:300px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; text-align:center; cursor:pointer; color: var(--text-main);">
+                <div style="font-size:2.5rem; color:var(--primary-color); margin-bottom:1rem;"><i class="fas fa-code"></i></div>
+                <div style="color:var(--text-main); font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Technology</div>
+                <div style="color:var(--text-secondary); font-size:1.1rem;">1.2K Articles</div>
+            </div>
+            <div class="category-card" data-category="Design" style="background:var(--card-bg); border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:18%; min-width:220px; max-width:300px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; text-align:center; cursor:pointer; color: var(--text-main);">
+                <div style="font-size:2.5rem; color:var(--primary-color); margin-bottom:1rem;"><i class="fas fa-paint-brush"></i></div>
+                <div style="color:var(--text-main); font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Design</div>
+                <div style="color:var(--text-secondary); font-size:1.1rem;">800 Articles</div>
+            </div>
+            <div class="category-card" data-category="Lifestyle" style="background:var(--card-bg); border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:18%; min-width:220px; max-width:300px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; text-align:center; cursor:pointer; color: var(--text-main);">
+                <div style="font-size:2.5rem; color:var(--primary-color); margin-bottom:1rem;"><i class="fas fa-book"></i></div>
+                <div style="color:var(--text-main); font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Lifestyle</div>
+                <div style="color:var(--text-secondary); font-size:1.1rem;">1.5K Articles</div>
+            </div>
+            <div class="category-card" data-category="Business" style="background:var(--card-bg); border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:18%; min-width:220px; max-width:300px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; text-align:center; cursor:pointer; color: var(--text-main);">
+                <div style="font-size:2.5rem; color:var(--primary-color); margin-bottom:1rem;"><i class="fas fa-chart-line"></i></div>
+                <div style="color:var(--text-main); font-size:1.4rem; font-weight:700; margin-bottom:0.5rem;">Business</div>
+                <div style="color:var(--text-secondary); font-size:1.1rem;">900 Articles</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Subscription -->
+    <div class="newsletter" style="background: var(--background-alt); padding: 4rem 5%; text-align: center;">
+        <h2 style="color: var(--text-main); font-size: 2rem; margin-bottom: 1rem;">Stay Updated</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem;">Get the latest articles and updates delivered to your inbox</p>
+        <form class="newsletter-form" style="max-width: 500px; margin: 0 auto; display: flex; gap: 1rem;">
+            <input type="email" placeholder="Enter your email" style="flex: 1; padding: 1rem; border-radius: 2rem; border: 2px solid var(--primary-color); background: var(--background); color: var(--text-main);">
+            <button type="submit" style="background: var(--primary-color); color: white; padding: 1rem 2rem; border-radius: 2rem; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Subscribe</button>
+        </form>
+    </div>
+
+    <section class="testimonials" style="background: var(--background-alt); padding: 4rem 5%; text-align: center;">
+        <h2 style="color: var(--text-main); font-size: 2.2rem; font-weight: 800; margin-bottom: 2rem;">What Our Users Say</h2>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+            <div class="testimonial-card" style="background: #fff; border-radius: 1rem; box-shadow: 0 4px 24px rgba(30,41,59,0.08); padding: 2rem; max-width: 500px; text-align: left; color: var(--text-main);">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <blockquote style="font-size: 1.3rem; color: var(--text-secondary); margin: 0 0 1.5rem 0; padding: 0; line-height: 1.6;">"BlogHub helped me grow my audience and connect with amazing readers!"</blockquote>
+                <div style="font-weight: 600; color: var(--text-main);">– Jane D.</div>
+            </div>
+            <div class="testimonial-card" style="background: #fff; border-radius: 1rem; box-shadow: 0 4px 24px rgba(30,41,59,0.08); padding: 2rem; max-width: 500px; text-align: left; color: var(--text-main);">
+                <i class="fas fa-quote-left" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                <blockquote style="font-size: 1.3rem; color: var(--text-secondary); margin: 0 0 1.5rem 0; padding: 0; line-height: 1.6;">"A fantastic platform for sharing stories and learning from others."</blockquote>
+                <div style="font-weight: 600; color: var(--text-main);">– Alex P.</div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1.5rem;">
+            <div class="footer-section" style="flex: 1 1 300px; min-width: 220px;">
+                <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:1rem; color:inherit;">About BlogSpot</h2>
+                <p style="color:#94a3b8; font-size:1.1rem; margin-bottom:1.5rem;">A creative space for writers to share their thoughts, stories, and ideas with the world. Join our community today and start your writing journey.</p>
+                <div style="display:flex; gap:1rem; margin-top:1rem;">
+                    <a href="#" aria-label="Twitter" style="background:#334155; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook" style="background:#334155; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/atticus.zen/" aria-label="Instagram" target="_blank" rel="noopener" style="background:#334155; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn" style="background:#334155; border-radius:50%; width:40px; height:40px; display:flex; align-items:center; justify-content:center; color:white; font-size:1.2rem;"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section" style="flex: 1 1 200px; min-width: 180px;">
+                <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:1rem; color:inherit;">Quick Links</h2>
+                <a href="#" style="font-size:1.1rem; color:#94a3b8; margin-bottom:0.8rem; display:block;">Home</a>
+                <a href="#" style="font-size:1.1rem; color:#94a3b8; margin-bottom:0.8rem; display:block;">Login</a>
+                <a href="#" style="font-size:1.1rem; color:#94a3b8; margin-bottom:0.8rem; display:block;">Register</a>
+                <a href="#" style="font-size:1.1rem; color:#94a3b8; margin-bottom:0.8rem; display:block;">Dashboard</a>
+            </div>
+            <div class="footer-section" style="flex: 1 1 200px; min-width: 180px;">
+                <h2 style="font-size:1.8rem; font-weight:700; margin-bottom:1rem; color:inherit;">Contact Us</h2>
+                <div style="font-size:1.1rem; color:#94a3b8; margin-bottom:1rem;">info@blogspot.com</div>
+                <div style="font-size:1.1rem; color:#94a3b8;">+1 (234) 567-890</div>
+            </div>
+        </div>
+        <div class="footer-bottom" style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #334155; color: #94a3b8; font-size: 1rem;">
+            <p>© 2025 BlogSpot. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <button id="backToTop" style="display:none;position:fixed;bottom:40px;right:40px;z-index:999;background:#2563eb;color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:2rem;cursor:pointer;">↑</button>
+    <script>
+    const btn = document.getElementById('backToTop');
+    window.onscroll = () => { btn.style.display = window.scrollY > 300 ? 'block' : 'none'; };
+    btn.onclick = () => window.scrollTo({top:0,behavior:'smooth'});
+    </script>
+
+    <script src="script.js"></script>
+    <script>
+    document.getElementById('home-logo').onclick = function() {
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            heroSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+    </script>
+    <script>
+    // --- Demo Data ---
+    const allArticles = [
+        {
+            title: 'Getting Started with Web Development',
+            author: 'John Doe',
+            date: '2024-03-15',
+            category: 'Technology',
+            summary: 'Learn the basics of web development and start your journey...',
+            img: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&q=80',
+        },
+        {
+            title: 'The Art of UI Design',
+            author: 'Jane Smith',
+            date: '2024-03-14',
+            category: 'Design',
+            summary: 'Discover the principles of creating beautiful user interfaces...',
+            img: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=600&q=80',
+        },
+        {
+            title: 'Healthy Habits for Writers',
+            author: 'Emily Clark',
+            date: '2024-03-13',
+            category: 'Lifestyle',
+            summary: 'Tips to stay healthy and productive as a writer...',
+            img: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=600&q=80',
+        },
+        {
+            title: 'Business Blogging 101',
+            author: 'Michael Lee',
+            date: '2024-03-12',
+            category: 'Business',
+            summary: 'How to use blogging to grow your business...',
+            img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+        },
+        {
+            title: 'Responsive Web Design',
+            author: 'Anna Kim',
+            date: '2024-03-11',
+            category: 'Technology',
+            summary: 'Make your websites look great on any device...',
+            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+        },
+        {
+            title: 'Color Theory in Design',
+            author: 'Jane Smith',
+            date: '2024-03-10',
+            category: 'Design',
+            summary: 'How to use color to create stunning visuals...',
+            img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+        },
+    ];
+
+    let articlesShown = 2;
+    let currentFilter = 'All';
+
+    function renderArticles() {
+        const container = document.querySelector('.latest-articles .articles-list');
+        if (!container) return;
+        let filtered = allArticles.filter(a => currentFilter === 'All' || a.category === currentFilter);
+        let toShow = filtered.slice(0, articlesShown);
+        container.innerHTML = toShow.map((article, i) => `
+            <div class="article-card" data-index="${i}" style="background:#fff; border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:40%; min-width:340px; max-width:600px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; transition: all 0.3s ease; position: relative; overflow: hidden; cursor:pointer;">
+                <div class="article-image" style="position: relative; margin: -2.5rem -2rem 1.5rem -2rem;">
+                    <img src="${article.img}" alt="${article.title}" style="width:100%; height:200px; object-fit:cover; border-radius: 1rem 1rem 0 0;" loading="lazy">
+                </div>
+                <h3 style="color:var(--text-main); font-size:1.8rem; font-weight:700; margin-bottom:0.5rem;">${article.title}</h3>
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="${article.author}" style="width: 40px; height: 40px; border-radius: 50%;" loading="lazy">
+                    <div>
+                        <div style="color:var(--text-main); font-weight:600;">${article.author}</div>
+                        <div style="color:var(--text-secondary); font-size:0.9rem;">${article.date}</div>
+                    </div>
+                </div>
+                <p style="color:var(--text-secondary); font-size:1.1rem; line-height:1.6; margin-bottom:1.5rem;">${article.summary}</p>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="display: flex; gap: 1rem;">
+                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="far fa-heart"></i>
+                            <span>245</span>
+                        </button>
+                        <button style="background: none; border: none; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="far fa-comment"></i>
+                            <span>42</span>
+                        </button>
+                    </div>
+                    <button style="background: var(--primary-color); color: white; padding: 0.5rem 1.5rem; border-radius: 2rem; border: none; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Read More</button>
+                </div>
+                <span style="display:inline-block; background:#2563EB; color:#fff; border-radius:1rem; padding:0.4rem 1.2rem; font-size:1rem; font-weight:600; position:absolute; top:1.5rem; right:1.5rem;">${article.category}</span>
+            </div>
+        `).join('');
+        document.getElementById('load-more-btn').style.display = (filtered.length > articlesShown) ? 'block' : 'none';
+
+        // Add modal event listeners for each article card
+        document.querySelectorAll('.latest-articles .article-card').forEach(card => {
+            card.onclick = function() {
+                let idx = this.getAttribute('data-index');
+                let article = filtered[idx];
+                let html = `
+                    <img src="${article.img}" alt="${article.title}" style="width:100%; border-radius:1rem; margin-bottom:1.5rem; height:180px; object-fit:cover;" loading="lazy">
+                    <h2 style="color:#334155; font-size:2rem; font-weight:700; margin-bottom:0.5rem;">${article.title}</h2>
+                    <div style="color:#64748b; font-size:1.1rem; margin-bottom:1rem;">${article.summary}</div>
+                    <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="${article.author}" style="width:36px; height:36px; border-radius:50%; box-shadow:0 2px 8px rgba(30,41,59,0.08);">
+                        <span style="color:#334155; font-weight:500;">${article.author}</span>
+                        <span style="color:#a0aec0;">${article.date}</span>
+                    </div>
+                    <span style="display:inline-block; background:#2563EB; color:#fff; border-radius:1rem; padding:0.4rem 1.2rem; font-size:1rem; font-weight:600;">${article.category}</span>
+                `;
+                document.getElementById('modal-body').innerHTML = html;
+                modal.style.display = 'block';
+            };
+        });
+    }
+
+    // Ensure only one filter button is .active on page load
+    document.querySelectorAll('.latest-articles .filter-btn').forEach(btn => btn.classList.remove('active'));
+    const allBtn = document.querySelector('.latest-articles .filter-btn[data-filter="All"]');
+    if (allBtn) allBtn.classList.add('active');
+
+    // Filter buttons
+    document.querySelectorAll('.latest-articles .filter-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.latest-articles .filter-btn').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            currentFilter = this.dataset.filter;
+            articlesShown = 2;
+            renderArticles();
+        });
+    });
+
+    // Load more
+    document.getElementById('load-more-btn').onclick = function() {
+        articlesShown += 2;
+        renderArticles();
+    };
+
+    // Trending Now: scroll to trending section
+    document.getElementById('trending-view-all').onclick = function(e) {
+        e.preventDefault();
+        document.querySelector('.trending-now').scrollIntoView({behavior:'smooth'});
+    };
+
+    // Browse Categories: filter articles
+    document.querySelectorAll('.browse-categories .category-card').forEach(card => {
+        card.onclick = function() {
+            let cat = this.dataset.category;
+            currentFilter = cat;
+            articlesShown = 2;
+            renderArticles();
+            // Highlight the filter button
+            document.querySelectorAll('.latest-articles .filter-btn').forEach(b => {
+                if (b.dataset.filter === cat) {
+                    b.classList.add('active');
+                } else {
+                    b.classList.remove('active');
+                }
+            });
+            window.scrollTo({top: document.querySelector('.latest-articles').offsetTop-80, behavior:'smooth'});
+        };
+    });
+
+    // Why Choose BlogHub: show info on hover
+    document.querySelectorAll('.features .feature-card').forEach(card => {
+        card.onmouseenter = function() {
+            this.style.boxShadow = '0 8px 32px rgba(139,124,246,0.18)';
+            this.style.transform = 'scale(1.03)';
+        };
+        card.onmouseleave = function() {
+            this.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.1)';
+            this.style.transform = 'none';
+        };
+    });
+
+    // Initial render
+    if (document.querySelector('.latest-articles .articles-list')) renderArticles();
+    </script>
+    <script>
+    // Trending Now data and rendering
+    const trendingArticles = [
+        {
+            title: 'The Future of AI in Web Development',
+            author: 'John Doe',
+            time: '5 min read',
+            summary: 'Exploring how artificial intelligence is revolutionizing the way we build websites...',
+            img: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=600&q=80',
+            avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+            category: 'Technology',
+        },
+        {
+            title: 'Latest Trends in Web Development',
+            author: 'Jane Smith',
+            time: '4 min read',
+            summary: 'Discover the newest technologies shaping the future of web development...',
+            img: 'https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=600&q=80',
+            avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
+            category: 'Technology',
+        },
+    ];
+
+    function renderTrending() {
+        const container = document.querySelector('.trending-list');
+        if (!container) return;
+        container.innerHTML = trendingArticles.map((article, i) => `
+            <div class="trending-card" data-index="${i}" style="background:#fff; border-radius:1.5rem; box-shadow:0 4px 24px rgba(30,41,59,0.08); width:40%; min-width:340px; max-width:600px; padding:2.5rem 2rem 2rem; margin-bottom:2rem; cursor:pointer;">
+                <img src="${article.img}" alt="${article.title}" style="width:100%; border-radius:1rem 1rem 0 0; margin-bottom:1.5rem; height:120px; object-fit:cover;" loading="lazy">
+                <span style="display:inline-block; background:#2563EB; color:#fff; border-radius:1rem; padding:0.4rem 1.2rem; font-size:1rem; font-weight:600; margin-bottom:1rem;">${article.category}</span>
+                <h3 style="color:#334155; font-size:2rem; font-weight:700; margin-bottom:0.5rem;">${article.title}</h3>
+                <div style="color:#64748b; font-size:1.1rem; margin-bottom:1rem;">${article.summary}</div>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <img src="${article.avatar}" alt="Author" style="width:36px; height:36px; border-radius:50%; box-shadow:0 2px 8px rgba(30,41,59,0.08);">
+                    <span style="color:#334155; font-weight:500;">${article.author}</span>
+                    <span style="color:#a0aec0;">${article.time}</span>
+                </div>
+            </div>
+        `).join('');
+    }
+    renderTrending();
+
+    // Trending card modal
+    let modal = document.createElement('div');
+    modal.id = 'trending-modal';
+    modal.style.display = 'none';
+    modal.style.position = 'fixed';
+    modal.style.top = '0';
+    modal.style.left = '0';
+    modal.style.width = '100vw';
+    modal.style.height = '100vh';
+    modal.style.background = 'rgba(30,41,59,0.18)';
+    modal.style.zIndex = '2000';
+    modal.innerHTML = `<div id="trending-modal-content" style="background:#fff; border-radius:1.5rem; max-width:500px; margin:8vh auto; padding:2.5rem; position:relative; box-shadow:0 8px 32px rgba(30,41,59,0.18);">
+        <button id="close-modal" style="position:absolute; top:1rem; right:1rem; background:none; border:none; font-size:1.5rem; color:#64748b; cursor:pointer;">&times;</button>
+        <div id="modal-body"></div>
+    </div>`;
+    document.body.appendChild(modal);
+
+    document.querySelector('.trending-list').addEventListener('click', function(e) {
+        let card = e.target.closest('.trending-card');
+        if (!card) return;
+        let idx = card.dataset.index;
+        let article = trendingArticles[idx];
+        let html = `
+            <img src="${article.img}" alt="${article.title}" style="width:100%; border-radius:1rem; margin-bottom:1.5rem; height:180px; object-fit:cover;" loading="lazy">
+            <h2 style="color:#334155; font-size:2rem; font-weight:700; margin-bottom:0.5rem;">${article.title}</h2>
+            <div style="color:#64748b; font-size:1.1rem; margin-bottom:1rem;">${article.summary}</div>
+            <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+                <img src="${article.avatar}" alt="Author" style="width:36px; height:36px; border-radius:50%; box-shadow:0 2px 8px rgba(30,41,59,0.08);">
+                <span style="color:#334155; font-weight:500;">${article.author}</span>
+                <span style="color:#a0aec0;">${article.time}</span>
+            </div>
+            <span style="display:inline-block; background:#2563EB; color:#fff; border-radius:1rem; padding:0.4rem 1.2rem; font-size:1rem; font-weight:600;">${article.category}</span>
+        `;
+        document.getElementById('modal-body').innerHTML = html;
+        modal.style.display = 'block';
+    });
+    modal.addEventListener('click', function(e) {
+        if (e.target.id === 'trending-modal' || e.target.id === 'close-modal') modal.style.display = 'none';
+    });
+
+    // Why Choose BlogHub tooltip and hover effects
+    const tooltip = document.getElementById('feature-tooltip');
+    document.querySelectorAll('.features .feature-card').forEach(card => {
+        card.addEventListener('mouseenter', function(e) {
+            tooltip.textContent = card.dataset.info;
+            tooltip.style.display = 'block';
+            let rect = card.getBoundingClientRect();
+            tooltip.style.top = (window.scrollY + rect.bottom + 8) + 'px';
+            tooltip.style.left = (rect.left + rect.width/2 - 120) + 'px';
+            this.style.transform = 'translateY(-5px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            tooltip.style.display = 'none';
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    </script>
+    <style>
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /* Animation Keyframes */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes scaleIn {
+        from {
+            transform: scale(0.95);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes slideInRight {
+        from {
+            transform: translateX(30px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+    }
+
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+
+    @keyframes rotateIn {
+        from {
+            transform: rotate(-10deg) scale(0.9);
+            opacity: 0;
+        }
+        to {
+            transform: rotate(0) scale(1);
+            opacity: 1;
+        }
+    }
+
+    @keyframes shimmer {
+        0% {
+            background-position: -200% center;
+        }
+        100% {
+            background-position: 200% center;
+        }
+    }
+
+    /* Apply animations to elements */
+    .hero-content h1 {
+        animation: fadeInUp 0.8s ease-out;
+    }
+
+    .hero-content p {
+        animation: fadeInUp 0.8s ease-out 0.2s backwards;
+    }
+
+    .cta-buttons {
+        animation: fadeInUp 0.8s ease-out 0.4s backwards;
+    }
+
+    .hero-image {
+        animation: scaleIn 1s ease-out;
+    }
+
+    .hero-image:hover {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .latest-articles h2,
+    .trending-now h2,
+    .features h3,
+    .about h2 {
+        animation: fadeInUp 0.8s ease-out;
+        position: relative;
+    }
+
+    .latest-articles h2::after,
+    .trending-now h2::after,
+    .features h3::after,
+    .about h2::after {
+        display: none !important;
+        content: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: none !important;
+        animation: none !important;
+    }
+
+    .filter-btn {
+        animation: fadeIn 0.6s ease-out;
+        transition: all 0.3s ease;
+    }
+
+    .filter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139,124,246,0.15);
+        animation: pulse 1s infinite;
+    }
+
+    .articles-list > div {
+        animation: scaleIn 0.6s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .articles-list > div:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+    }
+
+    .articles-list > div img {
+        transition: transform 0.3s ease;
+    }
+
+    .articles-list > div:hover img {
+        transform: scale(1.05);
+    }
+
+    .trending-card {
+        animation: scaleIn 0.6s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .trending-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+    }
+
+    .trending-card img {
+        transition: transform 0.3s ease;
+    }
+
+    .trending-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .feature-card {
+        animation: fadeInUp 0.6s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+    }
+
+    .feature-card i {
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover i {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    .about-content > div:nth-child(odd) {
+        animation: slideInLeft 0.8s ease-out;
+    }
+
+    .about-content > div:nth-child(even) {
+        animation: slideInRight 0.8s ease-out;
+    }
+
+    .about-content i {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .category-card {
+        animation: fadeInUp 0.6s ease-out;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 8px 32px rgba(30,41,59,0.12);
+    }
+
+    .category-card i {
+        transition: transform 0.3s ease;
+    }
+
+    .category-card:hover i {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    #load-more-btn {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    #load-more-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(139,124,246,0.15);
+    }
+
+    #load-more-btn::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(
+            45deg,
+            transparent,
+            rgba(139,124,246,0.1),
+            transparent
+        );
+        transform: rotate(45deg);
+        animation: shimmer 3s infinite;
+    }
+
+    .nav-links a {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #2563eb;
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        transform: translateY(-2px);
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    /* Add animation to tooltip */
+    #feature-tooltip {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    /* Add animation to modal */
+    #trending-modal {
+        transition: opacity 0.3s ease;
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    #trending-modal-content {
+        animation: scaleIn 0.3s ease-out;
+    }
+
+    /* Footer animations */
+    .footer-section a {
+        transition: all 0.3s ease;
+        position: relative;
+    }
+
+    .footer-section a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #2563eb;
+        transition: width 0.3s ease;
+    }
+
+    .footer-section a:hover {
+        transform: translateX(5px);
+    }
+
+    .footer-section a:hover::after {
+        width: 100%;
+    }
+
+    /* Add animation to images */
+    img {
+        transition: transform 0.3s ease;
+    }
+
+    img:hover {
+        transform: scale(1.05);
+    }
+
+    .whychoose-content > .why-row:nth-child(odd) {
+        animation: slideInLeft 0.8s ease-out;
+    }
+    .whychoose-content > .why-row:nth-child(even) {
+        animation: slideInRight 0.8s ease-out;
+    }
+    .whychoose-content .why-icon {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    /* Section Transition Animations */
+    section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    section.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Intersection Observer for Section Animations */
+    .filter-btn.active {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+    }
+
+    .feature-icon {
+        width: 64px;
+        height: 64px;
+        background: var(--primary-color);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        /* Ensure icon is centered */
+    }
+    .feature-icon i {
+        font-size: 2rem;
+        color: white;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+    }
+
+    /* Remove underline effect for Register button */
+    .signup-btn::after {
+        display: none !important;
+    }
+
+    .primary-btn, .secondary-btn {
+        transition: transform 0.2s cubic-bezier(.4,2,.6,1), box-shadow 0.2s;
+        will-change: transform, box-shadow;
+    }
+    .primary-btn:hover, .secondary-btn:hover {
+        transform: scale(1.06) translateY(-2px);
+        box-shadow: 0 8px 24px rgba(37,99,235,0.18);
+    }
+
+    /* Testimonial card animation */
+    .testimonial-card {
+        animation: fadeInUp 0.8s ease-out backwards;
+    }
+    .testimonial-card:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    /* Add fade-out animation for page transition */
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+
+    .fade-out {
+        animation: fadeOut 0.5s ease-out forwards;
+    }
+    </style>
+    <script>
+    // Section Animation Observer
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, observerOptions);
+
+    // Start observing all sections
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+    </script>
+    <script>
+    // Smooth transition for Login link
+    const loginLink = document.querySelector('a[href="login.html"]');
+    if (loginLink) {
+        loginLink.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+            const targetUrl = this.href;
+            document.body.classList.add('fade-out'); // Add fade-out class to body
+            // Wait for the animation to finish before navigating
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 500); // Match this duration to the CSS animation duration
+        });
+    }
+
+    // Smooth transition for Register link
+    const registerLink = document.querySelector('a[href="register.html"]');
+    if (registerLink) {
+        registerLink.addEventListener('click', function(e) {
+            e.preventDefault(); // Prevent default link behavior
+            const targetUrl = this.href;
+            document.body.classList.add('fade-out'); // Add fade-out class to body
+            // Wait for the animation to finish before navigating
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 500); // Match this duration to the CSS animation duration
+        });
+    }
+    </script>
+</body>
+</html>

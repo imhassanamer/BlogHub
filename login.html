@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BlogHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #F9FBFD;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .logo-container-fixed {
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background: #F9FBFD;
+            padding: 20px 3.5rem;
+            height: 72px;
+            box-sizing: border-box;
+        }
+        .login-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #F9FBFD;
+            padding: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+            color: #1d4ed8;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-header h1 {
+            font-size: 1.875rem;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #4b5563;
+        }
+
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .login-btn {
+            background: #2563eb !important;
+            color: #fff !important;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            font-size: 1.15rem;
+            font-family: inherit;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: block;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+
+        .login-btn:hover {
+            background: #1d4ed8 !important;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #64748b;
+        }
+
+        .login-footer a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .signup-btn {
+            background: #2563eb !important;
+            color: #fff !important;
+            font-weight: 600;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            box-shadow: 0 4px 15px rgba(37,99,235,0.12);
+            text-decoration: none;
+            transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+        .signup-btn:hover {
+            background: #1d4ed8 !important;
+            box-shadow: 0 8px 24px rgba(37,99,235,0.18);
+            transform: scale(1.06) translateY(-2px);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0.95); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(30px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        /* Footer animations */
+        .footer-section a {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .footer-section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .footer-section a:hover {
+            transform: translateX(5px);
+        }
+        .footer-section a:hover::after {
+            width: 100%;
+        }
+        /* Add animation to images */
+        img {
+            transition: transform 0.3s ease;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        /* Section Transition Animations */
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-links a {
+            color: #1E293B !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links .signup-btn {
+            color: #fff !important;
+        }
+        .signup-btn::after {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- BlogHub Logo -->
+    <div class="logo-container-fixed">
+        <a href="index.html" class="logo" style="text-align:left;">BlogHub</a>
+    </div>
+    <!-- Login Section -->
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Sign in to continue your journey</p>
+            </div>
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">Username or Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+            <div class="login-footer">
+                <p>Don't have an account? <a href="register.html">Register here</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+    document.getElementById('loginForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('http://localhost:5000/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                localStorage.setItem('bloghub_token', data.token);
+                localStorage.setItem('bloghub_email', email);
+                window.location.href = 'dashboard.html';
+            } else {
+                alert(data.message || 'Login failed');
+            }
+        } catch (err) {
+            console.error('Login error:', err);
+            alert('Login failed. Please try again.');
+        }
+    });
+    // Section Animation Observer
+    const sections = document.querySelectorAll('section');
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
+    const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            } else {
+                entry.target.classList.remove('visible');
+            }
+        });
+    }, observerOptions);
+    sections.forEach(section => {
+        sectionObserver.observe(section);
+    });
+    </script>
+</body>
+</html>
+

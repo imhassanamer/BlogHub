@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - BlogHub</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            background: #1e293b;
+            color: white;
+            padding: 2rem;
+        }
+
+        .sidebar-header {
+            margin-bottom: 2rem;
+        }
+
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            color: #2563eb;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0;
+        }
+
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            color: #94a3b8;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: #334155;
+            color: white;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            background: #f8fafc;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .welcome-text h1 {
+            font-size: 1.875rem;
+            color: #1e293b;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .stat-card h3 {
+            color: #64748b;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-card .value {
+            font-size: 1.875rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .recent-activity {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .recent-activity h2 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #2563eb;
+        }
+
+        .activity-details h4 {
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-details p {
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+
+        /* Animation styles */
+        @keyframes fadeSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .fade-slide-in {
+            animation: fadeSlideIn 0.8s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .fade-slide-in-delayed {
+            animation: fadeSlideIn 0.8s cubic-bezier(0.4,0,0.2,1) both;
+            animation-delay: 0.2s;
+        }
+        .stat-card.fade-slide-in {
+            animation-delay: 0.3s;
+        }
+        .stat-card.fade-slide-in-delayed {
+            animation-delay: 0.5s;
+        }
+        /* Publish button animation */
+        .publish-animated {
+            transition: transform 0.18s cubic-bezier(0.4,0,0.2,1), box-shadow 0.18s cubic-bezier(0.4,0,0.2,1);
+        }
+        .publish-animated:hover {
+            transform: scale(1.06) translateY(-2px);
+            box-shadow: 0 6px 24px rgba(37,99,235,0.18);
+        }
+        .publish-animated:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 8px rgba(37,99,235,0.12);
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 id="dashboard-logo" style="cursor:pointer;">BlogHub</h2>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-home"></i>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-pen-fancy"></i>
+                            Write Post
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-folder"></i>
+                            My Posts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-comments"></i>
+                            Comments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content fade-slide-in">
+            <div class="dashboard-header">
+                <div class="welcome-text">
+                    <h1>Welcome to BlogHub</h1>
+                </div>
+                <div class="user-menu" style="position:relative;">
+                    <div class="user-avatar" id="user-avatar" style="cursor:pointer;">W</div>
+                    <div id="user-dropdown" style="display:none; position:absolute; top:60px; right:0; background:#fff; box-shadow:0 4px 24px rgba(30,41,59,0.12); border-radius:1rem; min-width:220px; z-index:10;">
+                        <div style="padding:1.2rem 1.5rem; border-bottom:1px solid #e2e8f0;">
+                            <div id="user-dropdown-username" style="color:#334155; font-weight:700; font-size:1.1rem; margin-bottom:0.2rem;">Writer</div>
+                            <div id="user-dropdown-email" style="color:#64748b; font-size:0.98rem;">writer@email.com</div>
+                        </div>
+                        <button id="logout-btn" style="width:100%; background:#2563eb; color:#fff; border:none; border-radius:0 0 1rem 1rem; padding:1rem 0; font-weight:600; font-size:1.1rem; cursor:pointer;">Logout</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Write Post Section -->
+            <section id="write-post-section" style="display:block;">
+                <h2 style="color:#1e293b; font-size:2rem; font-weight:700; margin-bottom:1.5rem;">Write a New Post</h2>
+                <form id="write-post-form" style="background:#fff; border-radius:1rem; box-shadow:0 2px 8px rgba(30,41,59,0.08); padding:2rem; max-width:600px;">
+                    <div style="margin-bottom:1rem;">
+                        <label for="post-title" style="color:#334155; font-weight:600;">Title</label>
+                        <input id="post-title" type="text" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label for="post-category" style="color:#334155; font-weight:600;">Category</label>
+                        <select id="post-category" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                            <option value="">Select Category</option>
+                            <option value="Technology">Technology</option>
+                            <option value="Design">Design</option>
+                            <option value="Lifestyle">Lifestyle</option>
+                            <option value="Business">Business</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label for="post-content" style="color:#334155; font-weight:600;">Content</label>
+                        <textarea id="post-content" rows="6" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;"></textarea>
+                    </div>
+                    <button type="submit" class="publish-animated" style="background:#2563eb; color:#fff; border:none; border-radius:0.5rem; padding:0.75rem 2rem; font-weight:600; font-size:1.1rem;">Publish</button>
+                </form>
+            </section>
+
+            <!-- My Posts Section -->
+            <section id="my-posts-section" style="display:none;">
+                <h2 style="color:#1e293b; font-size:2rem; font-weight:700; margin-bottom:1.5rem;">My Posts</h2>
+                <div id="my-posts-list"></div>
+            </section>
+
+            <!-- View Post Modal -->
+            <div id="view-post-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+                <div style="background:#fff; border-radius:1rem; padding:2rem; max-width:800px; width:90%; max-height:90vh; overflow-y:auto;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                        <h3 id="view-post-title" style="color:#1e293b; font-size:1.5rem; font-weight:700;"></h3>
+                        <button onclick="closeViewModal()" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:1.5rem;">×</button>
+                    </div>
+                    <div id="view-post-category" style="color:#64748b; margin-bottom:1rem;"></div>
+                    <div id="view-post-content" style="color:#334155; line-height:1.6;"></div>
+                </div>
+            </div>
+
+            <!-- Edit Post Modal -->
+            <div id="edit-post-modal" style="display:none; position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+                <div style="background:#fff; border-radius:1rem; padding:2rem; max-width:800px; width:90%; max-height:90vh; overflow-y:auto;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+                        <h3 style="color:#1e293b; font-size:1.5rem; font-weight:700;">Edit Post</h3>
+                        <button onclick="closeEditModal()" style="background:none; border:none; color:#64748b; cursor:pointer; font-size:1.5rem;">×</button>
+                    </div>
+                    <form id="edit-post-form">
+                        <input type="hidden" id="edit-post-index">
+                        <div style="margin-bottom:1rem;">
+                            <label for="edit-post-title" style="color:#334155; font-weight:600;">Title</label>
+                            <input id="edit-post-title" type="text" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                        </div>
+                        <div style="margin-bottom:1rem;">
+                            <label for="edit-post-category" style="color:#334155; font-weight:600;">Category</label>
+                            <select id="edit-post-category" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                                <option value="Technology">Technology</option>
+                                <option value="Design">Design</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                                <option value="Business">Business</option>
+                            </select>
+                        </div>
+                        <div style="margin-bottom:1rem;">
+                            <label for="edit-post-content" style="color:#334155; font-weight:600;">Content</label>
+                            <textarea id="edit-post-content" rows="6" required style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;"></textarea>
+                        </div>
+                        <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:0.5rem; padding:0.75rem 2rem; font-weight:600; font-size:1.1rem;">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <section id="comments-section" style="display:none;">
+                <h2 style="color:#1e293b; font-size:2rem; font-weight:700; margin-bottom:1.5rem;">Comments</h2>
+                <div id="comments-list">
+                    <div style="color:#64748b;">No comments yet.</div>
+                </div>
+            </section>
+
+            <!-- Analytics Section -->
+            <section id="analytics-section" style="display:none;">
+                <h2 style="color:#1e293b; font-size:2rem; font-weight:700; margin-bottom:1.5rem;">Analytics</h2>
+                <div style="display:flex; gap:2rem; flex-wrap:wrap;">
+                    <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 8px rgba(30,41,59,0.08); padding:2rem; min-width:220px; flex:1;">
+                        <div style="color:#64748b;">Total Posts</div>
+                        <div id="analytics-total-posts" style="color:#334155; font-size:2rem; font-weight:700;">0</div>
+                    </div>
+                    <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 8px rgba(30,41,59,0.08); padding:2rem; min-width:220px; flex:1;">
+                        <div style="color:#64748b;">Total Comments</div>
+                        <div id="analytics-total-comments" style="color:#334155; font-size:2rem; font-weight:700;">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" style="display:none;">
+                <h2 style="color:#1e293b; font-size:2rem; font-weight:700; margin-bottom:1.5rem;">Settings</h2>
+                <form style="background:#fff; border-radius:1rem; box-shadow:0 2px 8px rgba(30,41,59,0.08); padding:2rem; max-width:500px;">
+                    <div style="margin-bottom:1rem;">
+                        <label for="user-name" style="color:#334155; font-weight:600;">Name</label>
+                        <input id="user-name" type="text" value="Writer" style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                    </div>
+                    <div style="margin-bottom:1rem;">
+                        <label for="user-email" style="color:#334155; font-weight:600;">Email</label>
+                        <input id="user-email" type="email" value="writer@email.com" style="width:100%; padding:0.75rem; border-radius:0.5rem; border:1px solid #e2e8f0; margin-top:0.5rem;">
+                    </div>
+                    <button type="submit" style="background:#2563eb; color:#fff; border:none; border-radius:0.5rem; padding:0.75rem 2rem; font-weight:600; font-size:1.1rem;">Save Changes</button>
+                </form>
+            </section>
+
+            <!-- Dashboard Home Section (default) -->
+            <section id="dashboard-home-section" style="display:none;">
+                <div class="dashboard-grid">
+                    <div class="stat-card fade-slide-in">
+                        <h3>Total Posts</h3>
+                        <div class="value" id="stat-total-posts">0</div>
+                    </div>
+                    <div class="stat-card fade-slide-in-delayed">
+                        <h3>Total Views</h3>
+                        <div class="value" id="stat-total-views">0</div>
+                    </div>
+                    <div class="stat-card fade-slide-in">
+                        <h3>Comments</h3>
+                        <div class="value" id="stat-total-comments">0</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+    // Add this at the beginning of your script
+    const API_URL = 'http://localhost:5000/api';
+    let posts = [];
+
+    // Function to get user info from token
+    async function getUserInfo() {
+        console.log('Attempting to get user info...');
+        const token = localStorage.getItem('bloghub_token');
+        if (!token) {
+            console.log('No token found, redirecting to login.');
+            window.location.href = 'login.html';
+            return;
+        }
+
+        try {
+            const response = await fetch(`${API_URL}/auth/user`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`Failed to get user info: ${response.status} ${response.statusText}`, errorText);
+                throw new Error('Failed to get user info');
+            }
+
+            const user = await response.json();
+            console.log('User info fetched successfully:', user);
+            const usernameElement = document.getElementById('user-dropdown-username');
+            if(usernameElement) usernameElement.textContent = user.name;
+            
+            const emailElement = document.getElementById('user-dropdown-email');
+            if(emailElement) emailElement.textContent = user.email;
+            
+            const avatarElement = document.getElementById('user-avatar');
+            if(avatarElement) avatarElement.textContent = user.name.charAt(0).toUpperCase();
+        } catch (err) {
+            console.error('Error during getUserInfo:', err);
+            alert('Could not load user info. Please log in again.');
+            window.location.href = 'login.html';
+        }
+    }
+
+    // Function to load posts
+    async function loadPosts() {
+        console.log('Attempting to load posts...');
+        const token = localStorage.getItem('bloghub_token');
+        if (!token) {
+            console.log('No token found for loading posts, aborting.');
+            return;
+        }
+        try {
+            const response = await fetch(`${API_URL}/posts`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error(`Failed to load posts: ${response.status} ${response.statusText}`, errorText);
+                throw new Error('Failed to load posts');
+            }
+
+            posts = await response.json();
+            console.log('Posts fetched successfully:', posts);
+            updateMyPosts();
+            updateAnalytics();
+            updateStats();
+        } catch (err) {
+            console.error('Error loading posts:', err);
+        }
+    }
+
+    // Update write post form submission
+    const writePostForm = document.getElementById('write-post-form');
+    const myPostsList = document.getElementById('my-posts-list');
+    writePostForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem('bloghub_token');
+        const title = document.getElementById('post-title').value;
+        const category = document.getElementById('post-category').value;
+        const content = document.getElementById('post-content').value;
+
+        try {
+            const response = await fetch(`${API_URL}/posts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ title, category, content })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create post');
+            }
+
+            const newPost = await response.json();
+            posts.unshift(newPost);
+            updateMyPosts();
+            updateAnalytics();
+            updateStats();
+            writePostForm.reset();
+            alert('Post published!');
+        } catch (err) {
+            console.error('Error creating post:', err);
+            alert('Failed to publish post. Please try again.');
+        }
+    });
+
+    // Update delete post function
+    async function deletePost(id) {
+        if (!confirm('Are you sure you want to delete this post?')) {
+            return;
+        }
+
+        const token = localStorage.getItem('bloghub_token');
+        try {
+            const response = await fetch(`${API_URL}/posts/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete post');
+            }
+
+            posts = posts.filter(post => post.id !== id);
+            updateMyPosts();
+            updateAnalytics();
+            updateStats();
+        } catch (err) {
+            console.error('Error deleting post:', err);
+            alert('Failed to delete post. Please try again.');
+        }
+    }
+
+    // Update edit post form submission
+    document.getElementById('edit-post-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const token = localStorage.getItem('bloghub_token');
+        const id = document.getElementById('edit-post-index').value;
+        const title = document.getElementById('edit-post-title').value;
+        const category = document.getElementById('edit-post-category').value;
+        const content = document.getElementById('edit-post-content').value;
+
+        try {
+            const response = await fetch(`${API_URL}/posts/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ title, category, content })
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update post');
+            }
+
+            const updatedPost = await response.json();
+            const index = posts.findIndex(post => post.id === id);
+            if (index !== -1) {
+                posts[index] = updatedPost;
+            }
+            updateMyPosts();
+            closeEditModal();
+        } catch (err) {
+            console.error('Error updating post:', err);
+            alert('Failed to update post. Please try again.');
+        }
+    });
+
+    // Update logout function
+    document.getElementById('logout-btn').onclick = function() {
+        localStorage.removeItem('bloghub_token');
+        localStorage.removeItem('bloghub_email');
+        window.location.href = 'login.html';
+    };
+
+    // Initialize
+    getUserInfo();
+    loadPosts();
+
+    // Sidebar navigation functionality
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = {
+        'Dashboard': document.getElementById('dashboard-home-section'),
+        'Write Post': document.getElementById('write-post-section'),
+        'My Posts': document.getElementById('my-posts-section'),
+        'Comments': document.getElementById('comments-section'),
+        'Analytics': document.getElementById('analytics-section'),
+        'Settings': document.getElementById('settings-section'),
+    };
+    function showSection(name) {
+        Object.values(sections).forEach(sec => sec.style.display = 'none');
+        if (sections[name]) sections[name].style.display = 'block';
+    }
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            showSection(link.textContent.trim());
+        });
+    });
+    // Default section
+    showSection('Dashboard');
+
+    // Write Post functionality
+    function updateMyPosts() {
+        if (!myPostsList) return;
+        if (posts.length === 0) {
+            myPostsList.innerHTML = '<div style="color:#64748b;">No posts yet.</div>';
+            return;
+        }
+        myPostsList.innerHTML = posts.map((post, index) => `
+            <div style="background:#fff; border-radius:1rem; box-shadow:0 2px 8px rgba(30,41,59,0.08); padding:1.5rem; margin-bottom:1rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <div style="flex:1;">
+                        <div style="color:#334155; font-weight:700; font-size:1.2rem;">${post.title}</div>
+                        <div style="color:#64748b; font-size:1rem;">${post.category} &bull; ${post.date}</div>
+                        <div style="color:#64748b; margin-top:0.5rem;">${post.content.substring(0, 100)}...</div>
+                    </div>
+                    <div style="display:flex; gap:0.5rem;">
+                        <button onclick="viewPost(${index})" style="background:#f1f5f9; color:#2563eb; border:none; border-radius:0.5rem; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s;">
+                            <i class="fas fa-eye" style="font-size:1.3rem;"></i>
+                        </button>
+                        <button onclick="editPost(${index})" style="background:#f1f5f9; color:#2563eb; border:none; border-radius:0.5rem; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s;">
+                            <i class="fas fa-edit" style="font-size:1.3rem;"></i>
+                        </button>
+                        <button onclick="deletePost(${post.id})" style="background:#f1f5f9; color:#ef4444; border:none; border-radius:0.5rem; width:44px; height:44px; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all 0.2s;">
+                            <i class="fas fa-trash" style="font-size:1.3rem;"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+    function updateAnalytics() {
+        document.getElementById('analytics-total-posts').textContent = posts.length;
+        document.getElementById('analytics-total-comments').textContent = 0;
+    }
+    function updateStats() {
+        document.getElementById('stat-total-posts').textContent = posts.length;
+        document.getElementById('stat-total-comments').textContent = 0;
+    }
+
+    // Logo click reloads dashboard
+    document.getElementById('dashboard-logo').onclick = function() { window.location.reload(); };
+
+    // User avatar dropdown functionality
+    const userAvatar = document.getElementById('user-avatar');
+    const userDropdown = document.getElementById('user-dropdown');
+    userAvatar.addEventListener('click', function(e) {
+        e.stopPropagation();
+        userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+    document.addEventListener('click', function(e) {
+        if (userDropdown.style.display === 'block') {
+            userDropdown.style.display = 'none';
+        }
+    });
+    userDropdown.addEventListener('click', function(e) {
+        e.stopPropagation();
+    });
+
+    // View Post functionality
+    function viewPost(index) {
+        const post = posts[index];
+        document.getElementById('view-post-title').textContent = post.title;
+        document.getElementById('view-post-category').textContent = `${post.category} • ${post.date}`;
+        document.getElementById('view-post-content').textContent = post.content;
+        document.getElementById('view-post-modal').style.display = 'flex';
+    }
+
+    function closeViewModal() {
+        document.getElementById('view-post-modal').style.display = 'none';
+    }
+
+    // Edit Post functionality
+    function editPost(index) {
+        const post = posts[index];
+        document.getElementById('edit-post-index').value = index;
+        document.getElementById('edit-post-title').value = post.title;
+        document.getElementById('edit-post-category').value = post.category;
+        document.getElementById('edit-post-content').value = post.content;
+        document.getElementById('edit-post-modal').style.display = 'flex';
+    }
+
+    function closeEditModal() {
+        document.getElementById('edit-post-modal').style.display = 'none';
+    }
+    </script>
+</body>
+</html>
